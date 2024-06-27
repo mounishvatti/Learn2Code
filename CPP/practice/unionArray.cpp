@@ -1,12 +1,14 @@
 #include<iostream>
-#include<set.h>
-#include<vector.h>
+#include <set>
+#include <vector>
+
 using namespace std;
+
 vector<int> unionArr(vector<int>&arr){
 	int n = arr.size();
 	set<int>s;
 	for(int i=0; i<n; i++){
-		set.insert(arr[i]);
+		s.insert(arr[i]);
 	}
 }
 int main(){
@@ -17,7 +19,7 @@ int main(){
 
 // Optimal solution
 
-vector<int> unionArr(vector<int>&arr){
+vector<int> unionArr(vector<int>&arr1, vector<int>&arr2){
 	// arr1 = 1,1,2,3,4,5
 	// arr2 = 2,3,4,5,6,7,8
 	
@@ -30,20 +32,20 @@ vector<int> unionArr(vector<int>&arr){
 	int j = 0;
 	while(i<n1 && j<n2){
 		if(arr1[i]<=arr2[j]){
-			if(uA.size == 0 || uA.back()!=arr1[i]){
+			if(uA.size() == 0 || uA.back()!=arr1[i]){
 				uA.push_back(arr1[i]);
 			}
 			i++;
 		}else if(arr2[j]<arr1[i]){
-			if(uA.size == 0 || uA.back()!=arr2[i]){
-				uA.push_back(arr2[i]);
+			if(uA.size() == 0 || uA.back()!=arr2[j]){
+				uA.push_back(arr2[j]);
 			}
 			j++;
 		}
 	}
 	while(i<n1){
 		if(arr1[i]<=arr2[j]){
-			if(uA.size == 0 || uA.back()!=arr1[i]){
+			if(uA.size() == 0 || uA.back()!=arr1[i]){
 				uA.push_back(arr1[i]);
 			}
 			i++;
@@ -51,8 +53,8 @@ vector<int> unionArr(vector<int>&arr){
 	}
 	while(j<n2){
 		if(arr2[j]<arr1[i]){
-			if(uA.size == 0 || uA.back()!=arr2[i]){
-				uA.push_back(arr2[i]);
+			if(uA.size() == 0 || uA.back()!=arr2[j]){
+				uA.push_back(arr2[j]);
 			}
 			j++;
 		}
