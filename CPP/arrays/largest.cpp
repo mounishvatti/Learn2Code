@@ -57,7 +57,8 @@ int second_smallest(vector<int>& arr) {
 
     if (size < 2) {
         // Handle case with less than 2 elements
-        return INT_MAX; // or an appropriate value indicating no second smallest
+        cout << "Cannot proceed as the size of the array is less than 2" << endl;
+        return -1; // or an appropriate value indicating no second smallest
     }
 
     int smallest = INT_MAX;
@@ -72,4 +73,18 @@ int second_smallest(vector<int>& arr) {
         }
     }
     return s_smallest;
+}
+
+int main(){
+    vector<int> arr = {1,2,3,4,5,6,7,8,9,0}
+
+    int largest = largest(arr);
+    int smallest = smallest(arr);
+    int s_largest = s_largest(arr);
+    int s_smallest = s_smallest(arr);
+
+    cout << "Largest: " << largest << endl;
+    cout << "smallest: " << smallest << endl;
+
+    return 0;
 }
