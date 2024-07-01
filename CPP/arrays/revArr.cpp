@@ -24,9 +24,12 @@ int main(){
 
 	vector<int>arr = {1,2,3,4,5};
 
-	reverse(arr, arr+d);
-	reverse(arr+d, arr+n);
-	reverse(arr, arr+n);
+	int n = arr.size();
+	int d = 3;
+
+	reverse(arr.begin(), arr.begin()+d);
+	reverse(arr.begin()+d, arr.end());
+	reverse(arr.begin(), arr.end());
 
 	for(auto it: arr){
 		cout << it << " ";
