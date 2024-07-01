@@ -216,9 +216,8 @@ Node* deleteKthEle(Node* head, int k){
 		temp->prev=nullptr;
 
 		delete nodeToBeDel;
-
-	return head;
 	}
+	return head;
 }
 
 // removing a given node
