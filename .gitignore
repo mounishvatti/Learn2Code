@@ -1,2 +1,5 @@
 .DS_Store
 .vscode/c_cpp_properties.json
+.vscode
+CPP/linkedlist/segregateOddEven.dSYM/Contents/Info.plist
+CPP/linkedlist/segregateOddEven.dSYM/Contents/Resources/Relocations/aarch64/segregateOddEven.yml
