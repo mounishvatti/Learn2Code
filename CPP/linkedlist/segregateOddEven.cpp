@@ -51,6 +51,29 @@ pair<Node*, Node*> segregate(Node* head){
 	return make_pair(headOdd, headEven);
 }
 
+pair<Node*, Node*> segregateBasedOnValue(Node* head){
+	Node* temp = head;
+
+	vector<int>evenArr;
+	vector<int>oddArr;
+
+	int count = 0;
+
+	while(temp){
+		if(temp->data%2==0){
+			evenArr.push_back(temp->data);
+		} else {
+			oddArr.push_back(temp->data);
+		}
+		temp = temp->next;
+	}
+
+	Node* headOdd = arr2LL(oddArr);
+	Node* headEven = arr2LL(evenArr);
+
+	return make_pair(headOdd, headEven);
+}
+
 // approach - 2 (we can use the fast pointer which has all the odd values which starts from head)
 
 // {1,2,3,4,5,6,7,8,9} 
