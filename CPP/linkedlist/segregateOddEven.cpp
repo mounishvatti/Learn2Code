@@ -120,6 +120,45 @@ pair<Node*, Node*> segregateFast(Node* head) {
     return make_pair(headOdd, headEven);
 }
 
+
+// approach - 3 
+/*
+use an external vector to store the values in odd even index format and replace the values of the linked list
+*/
+Node* segregateEvenOdd(Node* head){
+	if(head==NULL){
+		return nullptr;
+	}
+	vector<int> arr;
+	Node* odd = head;
+	Node* even = head->next;
+
+	// {1,2,3,4,5,6,7,8,9}. ans -> {1,3,5,7,9,2,4,6,8}
+	while(odd && odd->next){
+		arr.push_back(odd->data);
+		odd = odd->next->next;
+	}
+	if(odd) arr.push_back(temp->data);
+
+	while(even && even->next){
+		arr.push_back(even->data);
+		even = even->next->next;
+	}
+
+	if(even) arr.push_back(even->data);
+
+	Node* temp = head;
+	int i=0;
+	
+	while(temp){
+		temp->data = arr[i];
+		i++;
+		temp = temp->next;
+	}
+	return head;
+}
+
+
 int main(){
 	vector<int>arr = {1,2,3,4,5,6,7,8,9};
 
