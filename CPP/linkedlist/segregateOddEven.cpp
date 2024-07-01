@@ -138,7 +138,7 @@ Node* segregateEvenOdd(Node* head){
 		arr.push_back(odd->data);
 		odd = odd->next->next;
 	}
-	if(odd) arr.push_back(temp->data);
+	if(odd) arr.push_back(odd->data);
 
 	while(even && even->next){
 		arr.push_back(even->data);
