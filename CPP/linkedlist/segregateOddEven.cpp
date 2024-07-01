@@ -26,6 +26,7 @@ void display(Node* head){
 	cout << "NULL" << endl;
 }
 
+// approach - 1
 pair<Node*, Node*> segregate(Node* head){
 	Node* temp = head;
 
@@ -50,11 +51,72 @@ pair<Node*, Node*> segregate(Node* head){
 	return make_pair(headOdd, headEven);
 }
 
+// approach - 2 (we can use the fast pointer which has all the odd values which starts from head)
+
+// {1,2,3,4,5,6,7,8,9} 
+// odd = 1,3,5,7,9
+// even = 2,4,6,8
+pair<Node*, Node*> segregateFast(Node* head) {
+    if (!head) return make_pair(nullptr, nullptr);
+    if (!head->next) return make_pair(head, nullptr);
+
+    Node* odd = head;
+    Node* even = head->next;
+
+    vector<int> evenArr;
+    vector<int> oddArr;
+
+    while (odd && odd->next) {
+        oddArr.push_back(odd->data);
+        if (odd->next->next) {
+            odd = odd->next->next;
+        } else {
+            odd = nullptr;
+        }
+    }
+
+    while (even && even->next) {
+        evenArr.push_back(even->data);
+        if (even->next->next) {
+            even = even->next->next;
+        } else {
+            even = nullptr;
+        }
+    }
+
+    if (odd) {
+        oddArr.push_back(odd->data);
+    }
+    if (even) {
+        evenArr.push_back(even->data);
+    }
+
+    Node* headOdd = arr2LL(oddArr);
+    Node* headEven = arr2LL(evenArr);
+
+    return make_pair(headOdd, headEven);
+}
+
 int main(){
 	vector<int>arr = {1,2,3,4,5,6,7,8,9};
 
 	Node* head = arr2LL(arr);
-	
 
-	display(head);
+	pair<Node*, Node*>result1 = segregate(head);
+	pair<Node*, Node*>result2 = segregateFast(head);
+
+	Node* odd = result1.first; 
+	Node* even = result1.second;
+
+	Node* odd1 = result2.first;
+	Node* even1 = result2.second;
+
+	display(odd);
+	display(even);
+
+	cout << endl;
+
+	display(odd1);
+	display(even1);
 }
+
