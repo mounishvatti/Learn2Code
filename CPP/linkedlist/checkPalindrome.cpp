@@ -88,15 +88,58 @@ bool isPalindrome1(Node* head){
     return true;
 }
 
-// optimal solution
-bool isPalindrome2(Node* head){}
+// optimal solution - Tortoise Hare approach
+bool isPalindrome2(Node* head){
+    if(head == NULL) return false;
+    if(head->next == NULL) return true;
+
+    Node* slow = head;
+    Node* fast = head;
+
+    while(fast->next!=NULL && fast->next->next!=NULL){ 
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    Node* mid = slow;
+
+    Node* newHead = reverse(mid->next);
+
+    Node* first = head;
+    Node* second = newHead;
+
+    while(second!=NULL){
+        if(first->data != second->data){
+            head = reverse(newHead);
+            return false;
+        } 
+        first = first->next;
+        second = second->next;
+    }
+    head = reverse(newHead);
+    return true;
+}
 
 int main(){
 
     vector<int>arr = {1,2,3,2,1};
     Node* head = arr2LL(arr);
 
-    if(isPalindrome1(head) == 1){
+    // if(isPalindrome(head) == 1){
+    //     cout << "The linked list is a palindrome!" << endl;
+    // }
+    // else{
+    //     cout << "The linked list is not a palindrome!" << endl;
+    // }
+
+    // if(isPalindrome1(head) == 1){
+    //     cout << "The linked list is a palindrome!" << endl;
+    // }
+    // else{
+    //     cout << "The linked list is not a palindrome!" << endl;
+    // }
+
+    if(isPalindrome2(head) == 1){
         cout << "The linked list is a palindrome!" << endl;
     }
     else{
