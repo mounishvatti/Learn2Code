@@ -57,8 +57,17 @@ Node* removeNthNodeFromLast(Node* head, int n){
 
     int res = len - n;
 
+    Node* dummy = new Node(0);
+    dummy->next = head;
+
     int count = 0;
     Node* temp = head;
+
+    if(res == 1){
+        head = head->next;
+        delete temp;
+        return head;
+    }
 
     while(temp){
         count++;
@@ -76,8 +85,8 @@ Node* removeNthNodeFromLast(Node* head, int n){
 }
 
 int main(){
-    vector<int> arr = {1,2,3,4,5,6};
+    vector<int> arr = {1,2,3,4,5};
     Node* head = arr2LL(arr);
-    Node* res = removeNthNodeFromLast(head, 2);
+    Node* res = removeNthNodeFromLast(head, 4);
     display(res);
 }
