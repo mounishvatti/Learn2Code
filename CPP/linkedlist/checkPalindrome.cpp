@@ -33,8 +33,7 @@ Node* arr2LL(vector<int>&arr){
 // approach - 1
 
 bool isPalindrome(Node* head){ // TC: O(2N), SC: O(N)
-    if(head == nullptr) return false; 
-    if(head->next == nullptr) return true;
+    if(head == NULL || head->next == NULL) return false;
     Node* temp = head;
 
     stack<int>st;
@@ -71,9 +70,8 @@ Node* reverse(Node* head){
     return prevNode;
 }
 
-bool isPalindrome1(Node* head){
-    if(head == nullptr) return false;
-    if(head->next == nullptr) return true;
+bool isPalindrome1(Node* head){  // TC = O(2N); SC = O(N);
+    if(head == NULL || head->next == NULL) return false;
 
     Node* temp = head;
     Node* revHead = reverse(temp);
@@ -89,34 +87,33 @@ bool isPalindrome1(Node* head){
 }
 
 // optimal solution - Tortoise Hare approach
-bool isPalindrome2(Node* head){
-    if(head == NULL) return false;
-    if(head->next == NULL) return true;
+bool isPalindrome2(Node* head){  // TC = O(2N); SC = O(1);
+    if(head == NULL || head->next == NULL) return false;
 
     Node* slow = head;
     Node* fast = head;
 
-    while(fast->next!=NULL && fast->next->next!=NULL){ 
+    while(fast->next!=NULL && fast->next->next!=NULL){  // TC = O(N/2)
         slow = slow->next;
         fast = fast->next->next;
     }
 
     Node* mid = slow;
 
-    Node* newHead = reverse(mid->next);
+    Node* newHead = reverse(mid->next); // TC = O(N/2)
 
     Node* first = head;
     Node* second = newHead;
 
-    while(second!=NULL){
+    while(second!=NULL){ 
         if(first->data != second->data){
-            head = reverse(newHead);
+            head = reverse(newHead); // TC = O(N/2)
             return false;
         } 
         first = first->next;
         second = second->next;
     }
-    head = reverse(newHead);
+    head = reverse(newHead); // TC = O(N/2)
     return true;
 }
 
