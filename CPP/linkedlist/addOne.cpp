@@ -27,7 +27,7 @@ Node* arr2LL(vector<int>& arr) {
     return head;
 }
 
-int helper(Node* temp){
+int helper(Node* temp){ // recursive helper function to navigate to the last node
     if(temp == nullptr){
         return 1;
     }
@@ -40,7 +40,7 @@ int helper(Node* temp){
     return 1;
 }
 
-Node* func(Node* head) {
+Node* func(Node* head) { // to handle the case where carry is 1 and the temp->next is null and we are in a need of a new node
     int carry = helper(head);
     if(carry == 1){
         Node* temp = new Node(1);
