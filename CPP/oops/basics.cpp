@@ -3,7 +3,6 @@ using namespace std;
 
 //public private protected - access modifiers
 
-
 class Test{
 	// members or properties of the class (private by default)
 	int val;   
