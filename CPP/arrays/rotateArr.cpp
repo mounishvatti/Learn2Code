@@ -19,7 +19,7 @@ vector<int> LeftRotate(vector<int>&arr){
 }
 
 int main(){
-	vector<int>arr = {1,2,3,4,5}
+	vector<int>arr = {1,2,3,4,5};
 
 	LeftRotate(arr);
 }
