@@ -1,12 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> rearrangeElements(vector<int> &arr)
+vector<int> rearrangeElements(vector<int> &arr) // this is one approach in brute force
 { // brute force
     int n = arr.size();
     queue<int> pos;
     queue<int> neg;
-    vector<int> res(n);
 
     for (int i = 0; i < n; i++)
     {
@@ -16,19 +15,15 @@ vector<int> rearrangeElements(vector<int> &arr)
             neg.push(arr[i]);
     }
 
-    for (int i = 0; i < n; i += 2)
+    for (int i = 0; i < n; i++)
     {
-        res[i] = pos.front();
+        arr[2*i] = pos.front();
         pos.pop();
-    }
-
-    for (int i = 1; i < n; i += 2)
-    {
-        res[i] = neg.front();
+        arr[2*i+1] = neg.front();
         neg.pop();
     }
 
-    return res;
+    return arr;
 }
 
 // better approach
