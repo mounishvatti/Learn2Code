@@ -27,6 +27,7 @@ vector<int> twoSum(vector<int>&arr, int target){
         if(mp.find(comp) != mp.end()){
             return {mp[comp], i};
         }
+        mp[num] = i;
     }
     return {-1, -1};
 }
