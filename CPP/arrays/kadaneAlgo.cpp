@@ -38,7 +38,7 @@ int maxSubarraySumBetter(vector<int> &arr, int n)
 }
 
 int maxSubarraySumOptimal(vector<int> &arr, int n)
-{ // better approach
+{ // optimal approach
     int maxSum = INT_MIN;
     int currSum = 0;
     for (int i = 0; i < n; i++)
