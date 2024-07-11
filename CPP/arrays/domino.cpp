@@ -17,6 +17,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Approach 1
 int check(vector<int> &tops, vector<int> &bottoms, int num)
 {
     int countTop = 0, countBottom = 0;
@@ -38,6 +39,29 @@ int minDominoRotations(vector<int> &tops, vector<int> &bottoms)
 
     return (min(res1, res2) < 0) ? max(res1, res2) : min(res1, res2);
 }
+
+// Approach 2
+int minDominoRotationsBetter(vector<int>& tops, vector<int>& bottoms) {
+    vector<int> topCount(7, 0), bottomCount(7, 0), sameCount(7, 0);
+    int n = tops.size();
+    
+    for (int i = 0; i < n; ++i) {
+        topCount[tops[i]]++;
+        bottomCount[bottoms[i]]++;
+        if (tops[i] == bottoms[i]) {
+            sameCount[tops[i]]++;
+        }
+    }
+    
+    for (int i = 1; i <= 6; ++i) {
+        if (topCount[i] + bottomCount[i] - sameCount[i] == n) {
+            return n - max(topCount[i], bottomCount[i]);
+        }
+    }
+    
+    return -1;
+}
+
 
 int main()
 {
