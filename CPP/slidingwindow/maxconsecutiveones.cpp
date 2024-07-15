@@ -23,7 +23,7 @@ int func(const vector<int>&arr, int k){ // brute force
     return max_len;
 }
 
-// optimal approach - 2 pointers
+// better approach - 2 pointers
 int func2(const vector<int>&arr, int k){
     int n = arr.size();
     int max_len = 0;
@@ -33,6 +33,28 @@ int func2(const vector<int>&arr, int k){
     while(right < n){
         if(arr[right] == 0) zeros++;
         while(zeros > k){
+            if(arr[left] == 0) zeros--;
+            left++;
+        }
+        if(zeros <= k){
+            max_len = max(max_len, right-left+1);
+        }
+        right++;
+    }
+    return max_len;
+}
+
+// optimal approach
+
+int func3(const vector<int>&arr, int k){
+    int n = arr.size();
+    int max_len = 0;
+    int left = 0;
+    int right = 0;
+    int zeros = 0;
+    while(right < n){
+        if(arr[right] == 0) zeros++;
+        if(zeros > k){
             if(arr[left] == 0) zeros--;
             left++;
         }
