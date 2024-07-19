@@ -7,15 +7,7 @@ public:
 	Node* next;
 
 public:
-	Node(int data1, Node* next1){
-		data = data1;
-		next = next1;
-	}
-
-	Node(int data1){
-		data = data1;
-		next = nullptr;
-	}
+	Node(int data, Node* next = nullptr) : data(data), next(next) {}
 };
 
 Node* arr2LL(vector<int>&arr){
