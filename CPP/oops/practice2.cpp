@@ -1,7 +1,8 @@
 #include <iostream>
 using namespace std;
 
-class Student{
+class Student
+{
 private:
     static string college;
     int studentID;
@@ -9,30 +10,48 @@ private:
     int studentAge;
 
 public:
-    Student(int studentID, string studentName, int studentAge){
+    Student(int studentID, string studentName)
+    {
+        this->studentID = studentID;
+        this->studentName = studentName;
+    }
+
+    Student(int studentID, string studentName, int studentAge) // constructor overloading 
+    {
         this->studentID = studentID;
         this->studentName = studentName;
         this->studentAge = studentAge;
     }
 
-    void displayStudentInfo(){
+    void displayStudentInfo()
+    {
         cout << "Student ID: " << this->studentID << endl;
         cout << "Student Name: " << this->studentName << endl;
         cout << "Student Age: " << this->studentAge << endl;
-        cout << "College: " << this->college << endl; 
+        cout << "College: " << this->college << endl;
     }
 
-    void generateToken(){
+    void generateToken()
+    {
         cout << "Your token has been generated" << endl;
     }
-
 };
-string Student::college ="VIT";
+string Student::college = "VIT";
 
+class Teacher
+{
+public:
+    void markAttendance()
+    {
+        cout << "Attendance marked" << endl;
+    }
+};
 
-
-int main(){
-    Student* s1 = new Student(1, "Mounish", 22);
-    s1->displayStudentInfo();
-    s1->generateToken();
-}
+class Staff : public Teacher
+{ // inheritance
+public:
+    void checkStaff()
+    {
+        cout << "Staff ready!" << endl;
+    }
+};
