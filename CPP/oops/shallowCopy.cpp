@@ -32,6 +32,7 @@ int main(){
     ShallowCopy obj2 = obj1;
 
     obj1.setVal(20);
+    
     cout << obj1.getVal() << endl;
     cout << obj2.getVal() << endl;
 }
