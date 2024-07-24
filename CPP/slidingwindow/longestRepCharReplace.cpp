@@ -48,10 +48,35 @@ int function_opt1(string str, int k){
         maxfreq = max(maxfreq, hash[str[right] - 'A']);
         while((right - left + 1) - maxfreq > k){
             hash[str[left] - 'A']--;
-            // maxfreq = 0;
-            // for(int i = 0; i < 26; i++){
-            //     maxfreq = max(maxfreq, hash[i]);
-            // }
+            maxfreq = 0;
+            for(int i = 0; i < 26; i++){
+                maxfreq = max(maxfreq, hash[i]);
+            }
+            left++;
+        }
+        if((right - left + 1) - maxfreq <= k){
+            maxlen = max(maxlen, (right - left + 1));
+        }
+        right++;
+    }
+    return maxlen;
+}
+
+// optimal approach - 2
+int function_opt2(string str, int k){
+    int left = 0;
+    int right = 0;
+    int maxlen = 0;
+    int maxfreq = 0;
+
+    int n = str.length();
+    vector<int> hash(26, 0);
+
+    while(right < n){
+        hash[str[right] - 'A']++;
+        maxfreq = max(maxfreq, hash[str[right] - 'A']);
+        if((right - left + 1) - maxfreq > k){
+            hash[str[left] - 'A']--;
             left++;
         }
         if((right - left + 1) - maxfreq <= k){
@@ -69,5 +94,6 @@ int main(){
     //cin >> k;
     cout << function_brute(str, k) << endl;
     cout << function_opt1(str, k) << endl;
+    cout << function_opt2(str, k) << endl;
     return 0;
 }
