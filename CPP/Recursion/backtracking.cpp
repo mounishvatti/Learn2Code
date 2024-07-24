@@ -23,9 +23,21 @@ void func2(int i, int n)
     cout << i << endl;
 }
 
+
+void funcPrintn(int i, int n){
+    if(i>n){
+        return;
+    }
+    cout<<i<<endl;
+    funcPrintn(i+1,n);
+}
+
 int main()
 {
     func1(5, 5);
     cout << endl;
     func2(1, 5);
+    cout << endl;
+    funcPrintn(1,5);
+    return 0;
 }
