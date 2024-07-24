@@ -1,16 +1,13 @@
 from tkinter import *
 
 window = Tk()
-window.title("Hello World")
+window.title("GoAir - Book flight tickets")
 window.geometry("400x200")
-window.resizable(False, False)
+window.resizable(True, True)
 window.configure(bg="white")
-window.configure(highlightbackground="black")
-window.configure(highlightcolor="black")
-window.configure(highlightthickness=2)
-window.configure(highlightbackground="black")
-window.configure(highlightcolor="black")
-window.configure(highlightthickness=2)
+icon = PhotoImage(file="icon.png")
+window.iconphoto(True, icon)
+
 
 label = Label(window, text="Hello World", font=("Helvetica", 20))
 label.pack()
