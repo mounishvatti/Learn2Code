@@ -50,6 +50,7 @@ Node* revLinkedlistOptimal(Node* head){ // TC: O(2N), SC: O(1)
         prevNode = temp;
         temp = nextNode;
     }
+    return prevNode;
 }
 
 // approach - 3
