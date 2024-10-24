@@ -222,31 +222,37 @@ public:
 
 	LinkedList *addElementAtPos(LinkedList *head, int ele, int pos)
 	{
-		if (head == nullptr)
+		if (pos < 1)
 		{
-			cout << "Cannot add element" << ele << " at positon " << pos << endl;
-			return head;
+			cout << "Invalid position, must be >= 1." << endl;
+			return head; // Invalid position
 		}
 
-		else if (length(head) < pos)
-		{
+		if (pos == 1)
+		{ // Insert at head
+			return addElementAtStart(head, ele);
+		}
+
+		int len = length(head);
+		if (pos > len + 1)
+		{ // Allow insertion at the end
 			cout << "Position " << pos << " is out of bounds" << endl;
 			return head;
 		}
 
-		int count = 0;
 		LinkedList *temp = head;
-		while (temp && count != pos - 1)
+		int count = 1; // Start counting from 1
+		while (temp && count < pos - 1)
 		{
-			temp = temp->next;
+			temp = temp->next; // Move to the node before the position
 			count++;
 		}
 
-		LinkedList *newLinkedList = new LinkedList(ele);
-		newLinkedList->next = temp->next;
-		temp->next = newLinkedList;
+		LinkedList *newNode = new LinkedList(ele);
+		newNode->next = temp->next; // Insert new node at the position
+		temp->next = newNode;
 
-		return head;
+		return head; // Return the head of the linked list
 	}
 
 	// delete nodes in the linked list
@@ -263,22 +269,23 @@ public:
 	{
 		if (isNull(head))
 			return nullptr;
-		else if (head->next == nullptr)
-		{
+
+		if (head->next == nullptr)
+		{ // Only one element
 			delete head;
 			return nullptr;
 		}
-		else
-		{
-			LinkedList *temp = head;
-			while (temp->next->next != nullptr)
-			{
-				temp = temp->next;
-			}
-			delete temp->next;
-			temp->next = nullptr;
+
+		LinkedList *temp = head;
+		while (temp->next->next != nullptr)
+		{ // Stop at the second last node
+			temp = temp->next;
 		}
-		return head;
+
+		delete temp->next;	  // Delete the last node
+		temp->next = nullptr; // Set the second last node's next to nullptr
+
+		return head; // Return the updated head
 	}
 
 	LinkedList *deleteNode(LinkedList *head, int data)
@@ -354,5 +361,93 @@ public:
 		}
 
 		return head; // Return the head of the linked list
+	}
+
+	// reverse a singly linked list
+	LinkedList *reverse(LinkedList *head)
+	{ // TC: O(2N), SC: O(1)
+		if (head == NULL || head->next == NULL)
+			return head;
+
+		LinkedList *temp = head;
+		LinkedList *prevNode = NULL;
+
+		while (temp)
+		{
+			LinkedList *nextNode = temp->next;
+			temp->next = prevNode;
+			prevNode = temp;
+			temp = nextNode;
+		}
+		return prevNode;
+	}
+
+	// sort a singly linked list
+	LinkedList *sort(LinkedList *head)
+	{
+		if (head == NULL || head->next == NULL)
+			return head;
+
+		LinkedList *temp = head;
+
+		LinkedList *zeroDummyHead = new LinkedList(-1);
+		LinkedList *oneDummyHead = new LinkedList(-1);
+		LinkedList *twoDummyHead = new LinkedList(-1);
+
+		LinkedList *zero = zeroDummyHead;
+		LinkedList *one = oneDummyHead;
+		LinkedList *two = twoDummyHead;
+
+		while (temp)
+		{
+			if (temp->data == 0)
+			{
+				zero->next = temp;
+				zero = temp;
+			}
+			else if (temp->data == 1)
+			{
+				one->next = temp;
+				one = temp;
+			}
+			else
+			{
+				two->next = temp;
+				two = temp;
+			}
+
+			temp = temp->next;
+		}
+
+		zero->next = (oneDummyHead->next) ? oneDummyHead->next : twoDummyHead->next;
+		one->next = twoDummyHead->next;
+		two->next = nullptr;
+
+		head = zeroDummyHead->next;
+
+		delete zeroDummyHead;
+		delete oneDummyHead;
+		delete twoDummyHead;
+
+		return head;
+	}
+
+	// remove duplicates from a singly linkedlist
+	LinkedList *removeDuplicates(LinkedList *head)
+	{
+		if (head == nullptr)
+			return nullptr; // Return nullptr for an empty list
+
+		LinkedList *temp = head;
+		while (temp != nullptr)
+		{
+			LinkedList *curr = temp;
+			while (curr->next != nullptr && curr->data == curr->next->data)
+			{
+				curr->next = curr->next->next; // Skip duplicates
+			}
+			temp = temp->next; // Move to the next unique element
+		}
+		return head; // Return the modified list
 	}
 };
