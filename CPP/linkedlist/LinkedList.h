@@ -383,53 +383,64 @@ public:
 	}
 
 	// sort a singly linked list
-	LinkedList *sort(LinkedList *head)
+	LinkedList *helper_findMiddle(LinkedList *head)
 	{
-		if (head == NULL || head->next == NULL)
-			return head;
+		LinkedList *slow = head;
+		LinkedList *fast = head->next;
 
-		LinkedList *temp = head;
-
-		LinkedList *zeroDummyHead = new LinkedList(-1);
-		LinkedList *oneDummyHead = new LinkedList(-1);
-		LinkedList *twoDummyHead = new LinkedList(-1);
-
-		LinkedList *zero = zeroDummyHead;
-		LinkedList *one = oneDummyHead;
-		LinkedList *two = twoDummyHead;
-
-		while (temp)
+		while (fast != NULL && fast->next != NULL)
 		{
-			if (temp->data == 0)
+			slow = slow->next;
+			fast = fast->next->next;
+		}
+		return slow;
+	}
+
+	LinkedList *helper_merge(LinkedList *list1, LinkedList *list2)
+	{
+		LinkedList *dummyNode = new LinkedList(-1);
+		LinkedList *temp = dummyNode;
+		while (list1 != NULL && list2 != NULL)
+		{
+			if (list1->data < list2->data)
 			{
-				zero->next = temp;
-				zero = temp;
-			}
-			else if (temp->data == 1)
-			{
-				one->next = temp;
-				one = temp;
+				temp->next = list1;
+				temp = list1;
+				list1 = list1->next;
 			}
 			else
 			{
-				two->next = temp;
-				two = temp;
+				temp->next = list2;
+				temp = list2;
+				list2 = list2->next;
 			}
+		}
+		if (list1)
+			temp->next = list1;
+		else
+			temp->next = list2;
 
-			temp = temp->next;
+		return dummyNode->next;
+	}
+
+	LinkedList *sort(LinkedList *head)
+	{
+
+		if (head == NULL || head->next == NULL)
+		{
+			return head;
 		}
 
-		zero->next = (oneDummyHead->next) ? oneDummyHead->next : twoDummyHead->next;
-		one->next = twoDummyHead->next;
-		two->next = nullptr;
+		LinkedList *middle = helper_findMiddle(head);
+		LinkedList *rightHead = middle->next;
+		LinkedList *leftHead = head;
 
-		head = zeroDummyHead->next;
+		middle->next = NULL;
 
-		delete zeroDummyHead;
-		delete oneDummyHead;
-		delete twoDummyHead;
+		leftHead = sort(leftHead);
+		rightHead = sort(rightHead);
 
-		return head;
+		return helper_merge(leftHead, rightHead);
 	}
 
 	// remove duplicates from a singly linkedlist
