@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Seat {
-    private int seatNumber;
+
+    private final int seatNumber;
     private boolean reserved;
 
     // Constructor
@@ -24,16 +25,30 @@ class Seat {
             return false;
         }
     }
-   // Method to un-reserve the seat
-    public boolean unreserveSeat() {
-    	if(this.reserved) {
-    		this.reserved = false;
-    		System.out.println("Seat " + seatNumber + " has been successfully un-reserved");
-    		return true;
-    	} else {
-    		System.out.println("Seat " + seatNumber + " is not currently reserved.");
+
+    // Method to keep the seat on hold
+    public boolean holdSeat() {
+        // here another user cannot reserve this same seat
+        if (!this.reserved) {
+            this.reserved = true;
+            System.out.println("Seat " + seatNumber + " is on hold.");
+            return true;
+        } else {
+            System.out.println("Seat " + seatNumber + " is already reserved.");
             return false;
-    	}
+        }
+    }
+
+    // Method to un-reserve the seat
+    public boolean unreserveSeat() {
+        if (this.reserved) {
+            this.reserved = false;
+            System.out.println("Seat " + seatNumber + " has been successfully un-reserved");
+            return true;
+        } else {
+            System.out.println("Seat " + seatNumber + " is not currently reserved.");
+            return false;
+        }
     }
 
     // Method to check if the seat is reserved
@@ -47,6 +62,7 @@ class Seat {
 }
 
 class SeatManager {
+
     private Map<Integer, Seat> seats;
 
     // Constructor to initialize 20 seats
@@ -61,26 +77,24 @@ class SeatManager {
     public void allocateSeat(int seatNumber) {
         Seat seat = seats.get(seatNumber);
         if (seat != null) {
-        	// check if seat is reserved or not
-        	if(!seat.isReserved()) {
-        		seat.reserveSeat(); // allocate only if the seat is available
-        	} else {
-            	System.out.println("Seat number " + seatNumber + " is already reserved");
-        	}
-        }
-        else {
-        	System.out.println("Invalid seat number");
+            // check if seat is reserved or not
+            if (!seat.isReserved()) {
+                seat.reserveSeat(); // allocate only if the seat is available
+            } else {
+                System.out.println("Seat number " + seatNumber + " is already reserved");
+            }
+        } else {
+            System.out.println("Invalid seat number");
         }
     }
-    
+
     public void unreserveSeat(int seatNumber) {
-    	Seat seat = seats.get(seatNumber);
-    	if(seat != null && seat.isReserved() == true) {
-    		seat.unreserveSeat();
-    	}
-    	else {
-    		System.out.println("Invalid seat number: " + seatNumber);
-    	}
+        Seat seat = seats.get(seatNumber);
+        if (seat != null && seat.isReserved() == true) {
+            seat.unreserveSeat();
+        } else {
+            System.out.println("Invalid seat number: " + seatNumber);
+        }
     }
 
     // Method to check seat availability
@@ -91,6 +105,7 @@ class SeatManager {
 }
 
 public class TicketBookingSystem {
+
     public static void main(String[] args) {
         // Initialize the SeatManager with 20 seats
         SeatManager seatManager = new SeatManager(100);
@@ -107,4 +122,3 @@ public class TicketBookingSystem {
         System.out.println("Is seat 5 available? " + isAvailable);
     }
 }
-
