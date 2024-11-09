@@ -63,7 +63,7 @@ class Seat {
 
 class SeatManager {
 
-    private Map<Integer, Seat> seats;
+    private final Map<Integer, Seat> seats;
 
     // Constructor to initialize 20 seats
     public SeatManager(int numberOfSeats) {
