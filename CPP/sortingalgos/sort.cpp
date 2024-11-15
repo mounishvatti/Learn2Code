@@ -6,7 +6,6 @@
 using namespace std;
 
 // Bubble sort 
-
 void bubbleSort(vector<int>& arr){ // compare adjacent elements and swap if they are not in order
     for(int i = 0; i < arr.size(); i++){
         bool didswap = false; 
